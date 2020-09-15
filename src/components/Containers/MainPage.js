@@ -20,7 +20,6 @@ const MainPage = () => {
     const [inputData, setInput] = useState();
     const [animesData, setAnimesData] = useState(null);
 
-
     const getAnimes = async () => {
 
         let params = {
@@ -55,7 +54,7 @@ const MainPage = () => {
 
     return (
         <MainPageStyle>              
-        <Link to="/" ><img src="images/logo-principal.png" className="logo-image"></img></Link>
+        <Link to="/" ><img src="/images/Logo-principal.png" className="logo-image"></img></Link>
         <SearchBar handleSubmit={handleSubmit}  handleInput={handleInputChange} value={inputData}></SearchBar>
 
         <AnimeCardsGrid animesData={animesData}/>
