@@ -9,9 +9,8 @@ const PaginationStyle = styled.nav`
 
 `;
 
-const Pagination = ({ actualPage, pagesLimit }) => {
+const Pagination = ({ actualPage, pagesLimit, changeURL }) => {
 
-  console.log(pagesLimit);
   return (
       <PaginationStyle >
         <ul className="pagination justify-content-center">
@@ -20,31 +19,34 @@ const Pagination = ({ actualPage, pagesLimit }) => {
               "page-item " + ((actualPage === "0" || !actualPage) && "disabled")
             }
           >
-            <a href={"/animes"} className="page-link">
+            <button
+            onClick={(e)=>changeURL('page','set',0)}
+             className="page-link">
               First
-            </a>
+            </button>
           </li>
           {!(parseInt(actualPage) === 0 || !actualPage) && (
             <li className="page-item ">
-              <a
-                href={"/animes/" + (parseInt(actualPage) - 1)}
+              <button
+                onClick={(e)=>changeURL('page','set',parseInt(actualPage) - 1)}
                 className="page-link"
               >{actualPage - 1}
-              </a>
+              </button>
             </li>
           )}
           <li className="page-item active">
-            <a className="page-link" href={"/animes/" + actualPage}>
+            <a className="page-link"                 onClick={(e)=>changeURL('page','set',actualPage)}
+>
               {actualPage ? actualPage : "0"}
             </a>
           </li>
           {!(actualPage >=pagesLimit-1) && (
             <li className="page-item ">
-              <a
-                href={"/animes/" + (parseInt(actualPage) + 1)}
+              <button
+                onClick={(e)=>changeURL('page','set',parseInt(actualPage) + 1)}
                 className="page-link"
               >{parseInt(actualPage) + 1}
-              </a>
+              </button>
             </li>
           )}
           <li
@@ -52,9 +54,12 @@ const Pagination = ({ actualPage, pagesLimit }) => {
               "page-item " + ((actualPage >= pagesLimit-1) && "disabled")
             }
           >
-            <a href={"/animes/" + (pagesLimit -1)} className="page-link">
+            <button 
+                            onClick={(e)=>changeURL('page','set',pagesLimit -1)}
+
+            className="page-link">
               Last
-            </a>
+            </button>
           </li>
         </ul>
       </PaginationStyle>

@@ -13,7 +13,6 @@ const MainPageStyle = styled.div`
    margin-top:3rem;
    display: block;
  }
-
 `;
 
 const MainPage = () => {

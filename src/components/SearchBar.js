@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const SearchBarForm = styled.form`
@@ -17,19 +17,25 @@ const SearchBarForm = styled.form`
   }
 `;
 
-const Searchbar = ({handleSubmit, handleInput, value}) => {
+const Searchbar = ({handleSubmit}) => {
+  const [searchBarValue, setSearchBarValue] = useState();
+
+  const handleInputChange = (e) => {
+    setSearchBarValue(e.target.value);
+  };
+
   return (
     < >
-      <SearchBarForm onSubmit={handleSubmit} className="my-4 ">
+      <SearchBarForm onSubmit={(e)=>handleSubmit(e,searchBarValue)} className="my-4 ">
         <div className="row offset-2">
           <div className="col-md-8">
             <input
-            onChange={handleInput}
+            onChange={(e)=>handleInputChange(e)}
               className="form-control md-8 mr-sm-4"
               type="search"
               placeholder="Search"
               aria-label="Search"
-              value = {value}
+              value = {searchBarValue}
             />
           </div>
           <div className="col-md-2">
