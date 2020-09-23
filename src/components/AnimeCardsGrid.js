@@ -6,10 +6,7 @@ const AnimeCardsStyle = styled.div`
   display: grid;
   box-sizing: border-box;
   width: 100%;
-  padding: 2rem;
-  margin-left: auto;
-  margin-right: auto;
-  grid-column-gap: 10px;
+  grid-column-gap: 1.5rem;
   grid-row-gap: 1rem;
     p:{
         text-decoration: none;

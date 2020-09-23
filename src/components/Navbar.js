@@ -1,78 +1,104 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styled from 'styled-components'
-const NavbarStyle = styled.div`
-  background-color: #254949;
-  font-color: white;
+import styled from "styled-components";
+const NavbarStyle = styled.nav`
   display: flex;
-  height: 3rem;
-  .navbar-brand{
-    display:inline-block;
+  background-color: ${({ theme }) => theme.navBar};
+  font-color: white;
+  padding-top:1rem;
+  font-weight: 500;
+  font-size: 0.7rem;
+  img {
+    display: inline-block;
+    float:left;
+    vertical-align: middle;
+    height: 90%;
+    margin-top: -0.3rem;
     margin-left: 1rem;
   }
+  ul {
+    display: inline-block;
+    vertical-align: middle;
+
+    list-style-type: none;
+    float: left;
+    left: 30%;
+    position: relative;
+  }
   
-  ul li .nav-link{
-    padding-top: 15px;
-    color:white;
-    font-size: 0.7rem;
-    font-family: "Verdana", Verdana, Sans-serif;
-    font-weight: bold;
+  li {
+    display: inline-block;
 
-    display:inline-block;
-     
+    margin: 0 30px;
+    float: left;
+    left: -50%;
+    position: relative;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
   }
 
-  ul{
-    vertical-align: middle;
-    display:flex;
-   
+  & a:before {
+    content: "[";
+    left: -5px;
   }
-  .image-brand{
-    height: 1rem;
-    vertical-align: middle;
+  
+  & a:after {
+    content: "]";
+    right: -5px;
+  }
+  
+  & a:before,
+  & a:after {
+    position: absolute;
+    opacity: 0;
+    color: #fff;
+    top: -1px;
+    transition: all .5s;
+  }
+  
+  & a:hover:before,
+  & a:hover:after {
+    opacity: 0.7;
+  }
+  
+  & a:hover:before {
+    left: -20px;
+  }
+  
+  & a:hover:after {
+    right: -20px;
   }
 `;
 const Navbar = () => {
   return (
-    <NavbarStyle className="fixed-top" >
-       <a class="navbar-brand" href="#">
-         <img className="image-brand" src="/images/Navbar-brand.png"></img>
-  </a>
-      <ul className="nav justify-content-center">
-      
-        <li className="nav-item">
-          
-        <Link className="nav-link" to="/">
-           Home
+    <NavbarStyle className="fixed-top">
+      <img src="/images/Navbar-brand.png"></img>
+      <ul >
+        <li >
+          <Link  to="/">
+            Home
           </Link>
         </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/categories">
-           Categories
+        <li >
+          <Link  to="/categories">
+            Categories
           </Link>
         </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/animes">
-           All Animes
+        <li >
+          <Link  to="/animes">
+            All Animes
           </Link>
         </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/anime/top-upcoming">
+        <li >
+          <Link   to="/anime/top-upcoming">
             Trending Upcoming
           </Link>
         </li>
-        <li className="nav-item">
-          <a
-            className="nav-link disabled"
-            href="#"
-            tabIndex="-1"
-            aria-disabled="true"
-          >
-            Disabled
-          </a>
-        </li>
       </ul>
-
     </NavbarStyle>
   );
 };
