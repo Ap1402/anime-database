@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const ButtonStyle = styled(button)`
     color: ${({theme})=>theme.text};
-    background: ${({theme})=>theme.background};
+    background: ${({theme, isActive})=>isActive? 'black':theme.background};
     transition: all 0.4s ease 0s;
     border: 1px solid white;
     &:hover{

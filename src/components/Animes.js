@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import Pagination from "./Pagination";
-import { useLocation } from "react-router-dom";
+import { useLocation, withRouter } from "react-router-dom";
 import Spinner from "./Spinner";
 import AnimeCardsGrid from "./AnimeCardsGrid";
 import Searchbar from "./SearchBar";
 import { getAnimes } from "../helpers/getAnimes";
 import CategoriesWrapper from "./CategoriesWrapper";
 import Button from "./Button";
+
 // A custom hook that builds on useLocation to parse
 // the query string for you.
 function useQuery() {
@@ -18,6 +18,10 @@ const Animes = (props) => {
   // ----->
   const query = useQuery();
   const [activeCategory, setActiveCategory] = useState();
+  const [animesData, setAnimeData] = useState();
+  const page = query.get("page");
+  const sort = query.get("sort");
+  const [showCategories, setShowCategories] = useState(false);
 
   const [filters, setFilters] = useState({
     text: { value: null, active: false },
@@ -30,13 +34,6 @@ const Animes = (props) => {
       active: false,
     },
   });
-
-  const [animesData, setAnimeData] = useState();
-
-  const page = query.get("page");
-  const sort = query.get("sort");
-
-  const [showCategories, setShowCategories] = useState(false);
 
   const showCategoriesClicked = () => {
     setShowCategories(!showCategories);
@@ -136,16 +133,13 @@ const Animes = (props) => {
   if (animesData) {
     return (
       <>
-        <div className="row">
-          <div className="col">
-            <Searchbar handleSubmit={handleSubmit} />
-          </div>
-        </div>
+        <Searchbar handleSubmit={handleSubmit} />
+
         <div className="row">
           <div className="col-xs-12 col-sm-6">
-            <Button onClickFunction={handleClickCurrent} label="All" />
-            <Button onClickFunction={handleClickCurrent}  label="Airing" />
-            <Button onClickFunction={showCategoriesClicked}  label="Categories">
+            <Button onClickFunction={handleClickCurrent}  label="All" />
+            <Button onClickFunction={handleClickCurrent} isActive={filters.status.active?true:false}label="Airing" />
+            <Button onClickFunction={showCategoriesClicked} isActive={showCategories} label="Categories">
               <i
                 className={
                   "fas " +
@@ -205,4 +199,4 @@ const Animes = (props) => {
   }
 };
 
-export default Animes;
+export default withRouter(Animes);
