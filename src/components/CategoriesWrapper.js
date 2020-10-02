@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import styled from 'styled-components';
-import CategoryButton from './CategoryButton';
+import React, { useState } from "react";
+import styled from "styled-components";
+import CategoryButton from "./CategoryButton";
 import { Fade } from "react-reveal";
 
 const CategoriesWrapperStyled = styled.div`
@@ -15,33 +15,39 @@ margin-bottom:1.15rem;
 ;
 `;
 
-const CategoriesWrapper = ({showCategories, onClickCategoryHandler, activeCategory}) => {
-    const categoriesButtons = [
-        { name: "Action", slug: "action" },
-        { name: "Fiction", slug: "fiction" },
-        { name: "Horror", slug: "horror" },
-        { name: "Romance", slug: "romance" },
-        { name: "Drama", slug: "drama" },
-        { name: "Fantasy", slug: "fantasy" },
-        { name: "Ecchi", slug: "ecchi" },
-        { name: "Sports", slug: "sports" },
-      ];
+const CategoriesWrapper = ({
+  showCategories,
+  onClickCategoryHandler,
+  activeCategory,
+}) => {
+  const categoriesButtons = [
+    { name: "Action", slug: "action" },
+    { name: "Fiction", slug: "fiction" },
+    { name: "Horror", slug: "horror" },
+    { name: "Romance", slug: "romance" },
+    { name: "Drama", slug: "drama" },
+    { name: "Fantasy", slug: "fantasy" },
+    { name: "Ecchi", slug: "ecchi" },
+    { name: "Sports", slug: "sports" },
+    { name: "School life", slug: "school-life" },
+    { name: "Adventure", slug: "adventure" },
+  ];
 
-    return (
-        <CategoriesWrapperStyled className="mb-2 mt-2">
-        <Fade when={showCategories} collapse>
-          {categoriesButtons.map((category) => (
-            <CategoryButton
-              key={category.slug}
-              isActive={activeCategory === category.slug ? true : false}
-              onClickCategoryHandler={onClickCategoryHandler}
-              slug={category.slug}
-              categoryName={category.name}
-            />
-          ))}
-        </Fade>
-      </CategoriesWrapperStyled>
-    )
-}
+  return (
+    <CategoriesWrapperStyled className="mb-2 mt-2">
+      <Fade when={showCategories} collapse>
+        {categoriesButtons.map((category) => (
+          <CategoryButton
+            key={category.slug}
+            isActive={activeCategory === category.slug ? true : false}
+            onClickCategoryHandler={onClickCategoryHandler}
+            slug={category.slug}
+            categoryName={category.name}
+          />
+        ))}
+      </Fade>
+    </CategoriesWrapperStyled>
+  );
+};
 
-export default CategoriesWrapper
+export default CategoriesWrapper;

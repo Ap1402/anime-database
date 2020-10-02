@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 const SearchBarForm = styled.form`
-  .btn-search-style{
+  .btn-search-style {
     color: white;
     font-weight: bold;
     border: 1px solid #444f77;
-    &:hover{
+    &:hover {
       background-color: #214141;
       transition: all 0.5s ease;
     }
   }
 
-  .form-control:focus{
+  .form-control:focus {
     box-shadow: 0 0 0 0.2rem rgb(115, 154, 143, 0.8);
   }
 
@@ -36,7 +36,7 @@ const SearchBarForm = styled.form`
     left: 0;
     right: 0;
     bottom: 0;
-    background: ${({theme})=>theme.searchBar};
+    background: ${({ theme }) => theme.searchBar};
     -webkit-transform: scale(1);
     transform: scale(1);
     -webkit-transition-property: transform;
@@ -46,43 +46,49 @@ const SearchBarForm = styled.form`
     -webkit-transition-timing-function: ease-out;
     transition-timing-function: ease-out;
   }
-  .hvr-rectangle-in:hover, .hvr-rectangle-in:focus, .hvr-rectangle-in:active {
+  .hvr-rectangle-in:hover,
+  .hvr-rectangle-in:focus,
+  .hvr-rectangle-in:active {
     color: white;
   }
-  .hvr-rectangle-in:hover:before, .hvr-rectangle-in:focus:before, .hvr-rectangle-in:active:before {
+  .hvr-rectangle-in:hover:before,
+  .hvr-rectangle-in:focus:before,
+  .hvr-rectangle-in:active:before {
     -webkit-transform: scale(0);
     transform: scale(0);
   }
 `;
 
-const Searchbar = ({handleSubmit}) => {
+const Searchbar = ({ handleSubmit }) => {
   const [searchBarValue, setSearchBarValue] = useState();
 
   const handleInputChange = (e) => {
     setSearchBarValue(e.target.value);
   };
 
-  
-
   return (
-    < >
-      <SearchBarForm onSubmit={(e)=>handleSubmit(e,searchBarValue)} className="my-4 ">
-        <div className="row offset-2">
-          <div className="col-md-8">
-            <input
-            onChange={(e)=>handleInputChange(e)}
-              className="form-control md-8 mr-sm-4"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              value = {searchBarValue}
-            />
-          </div>
-          <div className="col-md-2">
-            <button className="btn btn-search-style md-2 hvr-rectangle-in " type="submit">
-              Search
-            </button>
-          </div>
+    <>
+      <SearchBarForm
+        onSubmit={(e) => handleSubmit(e, searchBarValue)}
+        className="my-4 offset-2 row"
+      >
+        <div className="col-8 ">
+          <input
+            onChange={(e) => handleInputChange(e)}
+            className="form-control"
+            type="search"
+            placeholder="What anime are you searching for?"
+            aria-label="Search"
+            value={searchBarValue}
+          />
+        </div>
+        <div className="col-2">
+          <button
+            className="btn btn-search-style md-2 hvr-rectangle-in "
+            type="submit"
+          >
+            Search
+          </button>
         </div>
       </SearchBarForm>
     </>

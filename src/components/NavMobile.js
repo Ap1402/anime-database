@@ -62,6 +62,7 @@ const OpenButton = styled.button`
 
     z-index: 2;
     right: 0;
+    top: 0;
     &:hover {
       color: gray;
     }
@@ -74,40 +75,38 @@ const OpenButton = styled.button`
   }
 `;
 
-const NavMobile =()=>{
-
-const [isOpen, setIsOpen] = useState(false);
-const handleCloseButton = () => {
-  setIsOpen(!isOpen);
-};
+const NavMobile = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const handleCloseButton = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <>
-      <OpenButton onClick={()=>handleCloseButton()}>
+      <OpenButton onClick={() => handleCloseButton()}>
         <div></div>
         <div></div>
         <div></div>
       </OpenButton>
       <ResponsiveNav open={isOpen}>
-        <CloseButton onClick={()=>handleCloseButton()} title="close">
+        <CloseButton onClick={() => handleCloseButton()} title="close">
           &times;
         </CloseButton>
         <ul>
           <li>
             <Link offset="20px" to="/">
-                Home
+              Home
             </Link>
           </li>
           <li>
             <Link offset="20px" to="/">
-                Trend Upcoming
+              Trend Upcoming
             </Link>
           </li>
-
         </ul>
       </ResponsiveNav>
     </>
   );
-} 
+};
 
 export default NavMobile;

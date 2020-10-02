@@ -136,10 +136,18 @@ const Animes = (props) => {
         <Searchbar handleSubmit={handleSubmit} />
 
         <div className="row">
-          <div className="col-xs-12 col-sm-6">
-            <Button onClickFunction={handleClickCurrent}  label="All" />
-            <Button onClickFunction={handleClickCurrent} isActive={filters.status.active?true:false}label="Airing" />
-            <Button onClickFunction={showCategoriesClicked} isActive={showCategories} label="Categories">
+          <div className="col-8 col-sm-6">
+            <Button onClickFunction={handleClickCurrent} label="All" />
+            <Button
+              onClickFunction={handleClickCurrent}
+              isActive={filters.status.active ? true : false}
+              label="Airing"
+            />
+            <Button
+              onClickFunction={showCategoriesClicked}
+              isActive={showCategories}
+              label="Categories"
+            >
               <i
                 className={
                   "fas " +
@@ -151,8 +159,8 @@ const Animes = (props) => {
             </Button>
           </div>
 
-          <div className="col-xs-12 col-sm-6">
-            <div className="mx-1 float-right">
+          <div className="col-4 col-sm-6">
+            <div className="mx-1 my-1 float-right">
               <span>Show:</span>
               <select
                 onChange={(e) => selectLimitHandler(e)}
@@ -165,7 +173,7 @@ const Animes = (props) => {
                 <option value="20">20</option>
               </select>
             </div>
-            <div className="mx-1 float-right">
+            <div className="mx-1 my-1 float-right">
               <span>Sort By:</span>
               <select onChange={(e) => selectChangeHandler(e)} name="sortBy">
                 <option value="popularityRank">Popularity</option>

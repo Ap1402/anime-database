@@ -3,41 +3,42 @@ import { useParams } from "react-router";
 import Axios from "axios";
 import styled from "styled-components";
 import qs from "qs";
-import { Link } from "react-router-dom";
 import Spinner from "./Spinner";
 
 const AnimeDescriptionStyle = styled.div`
-background: url(${props=>props.imageUrl});
-background-repeat: no-repeat;
-background-size: 100% 25%;
-background
-background-color: white;
+  background-color: ${({ theme }) => theme.cardBackColor};
+  border-radius: 1rem;
+  color: ${({ theme }) => theme.color};
+  overflow: hidden;
   .anchor {
     text-decoration: none;
   }
-  .anime-image {
+  .background {
     width: 100%;
-    height: 30rem;
-  }
-  .body-card-1 {
-    width: 100%;
-    height: 100%;
-  }
-  .top-cover {
-    position: absolute;
-    width: 100%;
-    height: 25%;
+    height: auto;
     opacity: 0.7;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    margin: 0px;
   }
-  .anime-info {
-    margin-top: 20%;
+  .anime-image {
+    border: 4px solid white;
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-top: 1rem;
+    @media screen and (min-width: 1000px) {
+      margin-top: -190px;
+      z-index: 10;
+    }
   }
 
+  .anime-info {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-top: 1rem;
+    @media screen and (min-width: 1000px) {
+      margin: 0;
+      margin-top: 2rem;
+    }
+  }
   ul {
     list-style: none;
     li {
@@ -55,6 +56,29 @@ background-color: white;
       }
     }
   }
+`;
+
+const StatusBar = styled.p`
+  display: block;
+  position: relative;
+  background-color: ${({ status }) => {
+    if (status === "finished") {
+      return "#b50012";
+    }
+    if (status === "upcoming") {
+      return "#003b8f";
+    }
+    if (status === "current") {
+      return "#005c0b";
+    }
+  }};
+  color: white;
+  padding: 10px;
+  margin-top: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.15);
+  font-weight: bold;
+  text-align: center;
 `;
 
 const MangaDescription = () => {
@@ -94,11 +118,7 @@ const MangaDescription = () => {
       mangaData.included && (
         <ul>
           {mangaData.included.map((categoryData) => (
-            <li>
-              <Link className="anchor" href="/anime?categories=action">
-                {categoryData.attributes.title}
-              </Link>
-            </li>
+            <li className="anchor">{categoryData.attributes.title}</li>
           ))}
         </ul>
       )
@@ -108,36 +128,47 @@ const MangaDescription = () => {
   if (!loading) {
     console.log(mangaData);
     return (
-      <AnimeDescriptionStyle imageUrl={
-        mangaData.data.attributes.coverImage
-          ? mangaData.data.attributes.coverImage.large
-          : null
-      } className="card rounded">
-        <div className="card-body">
-          <div className="row">
-            <div className=" col-lg-4 col-md-4 col-sm-10">
-              <img
-                className="rounded anime-image"
-                src={mangaData.data.attributes.posterImage.large}
-                alt="Card cap"
-              />
-            </div>
-            <div className=" anime-info  col-lg-7 col-md-7  col-sm-10 ">
-              <h1 className="anime-title">
-                {mangaData.data.attributes.canonicalTitle}
-              </h1>
-              <p>{mangaData.data.attributes.synopsis}</p>
-              <p>Start Date: {mangaData.data.attributes.startDate}</p>
-              <p>Status: {mangaData.data.attributes.status}</p>
-              <h5>Categories</h5>
-              {showCategories()}
-            </div>
+      <AnimeDescriptionStyle>
+        <div className="row">
+          <div className="col-12">
+            <img
+              className="background"
+              src={
+                mangaData.data.attributes.coverImage
+                  ? mangaData.data.attributes.coverImage.large
+                  : null
+              }
+              alt="Card cap"
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-lg-3 col-md-3 col-10 mx-4">
+            <img
+              className="rounded anime-image"
+              src={mangaData.data.attributes.posterImage.large}
+              alt="Card cap"
+            />
+            <StatusBar status={mangaData.data.attributes.status}>
+              <span className="fas fa-tv">
+                {" " + mangaData.data.attributes.status.toUpperCase()}
+              </span>
+            </StatusBar>
+          </div>
+          <div className=" anime-info  col-lg-7 col-md-7  col-sm-10 ">
+            <h1 className="anime-title">
+              {mangaData.data.attributes.canonicalTitle}
+            </h1>
+            <p>{mangaData.data.attributes.synopsis}</p>
+            <p>Start Date: {mangaData.data.attributes.startDate}</p>
+            <h5>Categories</h5>
+            {showCategories()}
           </div>
         </div>
       </AnimeDescriptionStyle>
     );
   } else {
-    return <Spinner/>;
-  };
-}
+    return <Spinner />;
+  }
+};
 export default MangaDescription;

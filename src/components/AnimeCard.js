@@ -48,11 +48,11 @@ const AnimeCardStyle = styled.div`
     top: 0;
     left: 0;
     opacity: 1;
-    -webkit-transition: all 1.3s ease;
-    -moz-transition: all 1.3s ease;
-    -o-transition: all 1.3s ease;
-    -ms-transition: all 1.3s ease;
-    transition: all 1.3s ease;
+    -webkit-transition: all 0.8s ease;
+    -moz-transition: all 0.8s ease;
+    -o-transition: all 0.8s ease;
+    -ms-transition: all 0.8s ease;
+    transition: all 0.8s ease;
   }
 
   .ver_mas {
@@ -88,10 +88,24 @@ const AnimeCardStyle = styled.div`
   .ver_mas h4 {
     font-size: 0.7rem;
     white-space: nowrap;
+
     text-overflow: ellipsis;
     overflow: hidden;
   }
+  .ver_mas p {
+    font-size: 0.8rem;
+    color: white;
+    padding: 6px;
+  }
+  .ver_mas h4:first-of-type {
+    margin-top: 1.3rem;
+  }
 
+  .ver_mas h2 {
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    color: white;
+  }
   /*hovers*/
 
   .container_foto:hover {
@@ -151,23 +165,46 @@ const AnimeCardStyle = styled.div`
   }
 `;
 
-const MangaCard = ({ title, imgUrl, id, popularityRank, ratingRank }) => {
+const MangaCard = ({
+  title,
+  imgUrl,
+  id,
+  popularityRank,
+  ratingRank,
+  synopsis,
+}) => {
+  const truncateText = (synopsis) => {
+    if (!synopsis) {
+      return "No synopsis";
+    }
+    if (synopsis.length > 180) {
+      return synopsis.substring(0, 180) + "...";
+    }
+    return synopsis;
+  };
+
   return (
     <AnimeCardStyle>
       <Link to={"/anime/" + id} className="anchor">
         <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12 container_foto ">
           <div className="ver_mas text-center">
+            <h2>{title}</h2>
             <h4>
               <i className="fas fa-heart"></i> Popularity Rank #{popularityRank}
             </h4>
             <h4>
               <i className="fas fa-star"></i> Most Rated #{ratingRank}
             </h4>
+            <p>{truncateText(synopsis)}</p>
 
             <span className="lnr lnr-eye"></span>
           </div>
-          <article className="text-left"></article>
-          <img src={imgUrl} alt="" />
+          <article className="text-left"> </article>
+          {imgUrl ? (
+            <img src={imgUrl.medium} alt="" />
+          ) : (
+            <img src="images/imageNotFound.jpg" alt="" />
+          )}
         </div>
         <h2>{title}</h2>
       </Link>

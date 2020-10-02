@@ -8,14 +8,12 @@ const AnimeCardsStyle = styled.div`
   width: 100%;
   grid-column-gap: 1.5rem;
   grid-row-gap: 1rem;
-    p:{
-        text-decoration: none;
-
-    }
+  p: {
+    text-decoration: none;
+  }
   grid-template-columns: 20% 20% 20% 20%;
-    &:hover:{
-
-    }
+  &:hover: {
+  }
   @media (max-width: 600px) {
     grid-template-columns: 90%;
   }
@@ -28,19 +26,17 @@ const AnimeCardsStyle = styled.div`
 const AnimeCardsGrid = ({ animesData }) => {
   return (
     <AnimeCardsStyle className="justify-content-center">
-      {animesData&&
+      {animesData &&
         animesData.data.map((data) => {
           return (
             <AnimeCard
               key={data.id}
               title={data.attributes.canonicalTitle}
-              imgUrl={data.attributes.posterImage.medium}
+              imgUrl={data.attributes.posterImage}
               id={data.id}
               popularityRank={data.attributes.popularityRank}
               ratingRank={data.attributes.ratingRank}
               synopsis={data.attributes.synopsis}
-
-
             ></AnimeCard>
           );
         })}
