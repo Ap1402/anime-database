@@ -96,14 +96,15 @@ const AnimeCardStyle = styled.div`
     font-size: 0.8rem;
     color: white;
     padding: 6px;
+    @media screen;
   }
   .ver_mas h4:first-of-type {
-    margin-top: 1.3rem;
+    margin-top: 1rem;
   }
 
   .ver_mas h2 {
-    margin-top: 2rem;
-    font-size: 1.2rem;
+    margin-top: 0.3rem;
+    font-size: 1rem;
     color: white;
   }
   /*hovers*/
@@ -138,9 +139,9 @@ const AnimeCardStyle = styled.div`
 
     .fadeout {
       position: absolute;
-      bottom: 0em;
+      bottom: 0;
       width: 100%;
-      height: 4em;
+      height: 100%;
       background: -webkit-linear-gradient(
         rgba(255, 255, 255, 0) 0%,
         rgba(255, 255, 255, 1) 100%
@@ -177,8 +178,8 @@ const MangaCard = ({
     if (!synopsis) {
       return "No synopsis";
     }
-    if (synopsis.length > 180) {
-      return synopsis.substring(0, 180) + "...";
+    if (synopsis.length > 170) {
+      return synopsis.substring(0, 170) + "...";
     }
     return synopsis;
   };
@@ -196,8 +197,6 @@ const MangaCard = ({
               <i className="fas fa-star"></i> Most Rated #{ratingRank}
             </h4>
             <p>{truncateText(synopsis)}</p>
-
-            <span className="lnr lnr-eye"></span>
           </div>
           <article className="text-left"> </article>
           {imgUrl ? (

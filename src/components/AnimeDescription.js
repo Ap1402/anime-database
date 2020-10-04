@@ -18,6 +18,7 @@ const AnimeDescriptionStyle = styled.div`
     height: auto;
     opacity: 0.7;
   }
+
   .anime-image {
     border: 4px solid white;
     position: relative;
@@ -136,7 +137,7 @@ const MangaDescription = () => {
               src={
                 mangaData.data.attributes.coverImage
                   ? mangaData.data.attributes.coverImage.large
-                  : null
+                  : "/images/backgroundImageDescription.jpg"
               }
               alt="Card cap"
             />

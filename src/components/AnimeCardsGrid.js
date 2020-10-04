@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import AnimeCard from "./AnimeCard";
+import Spinner from "./Spinner";
 
 const AnimeCardsStyle = styled.div`
   display: grid;
@@ -11,11 +12,11 @@ const AnimeCardsStyle = styled.div`
   p: {
     text-decoration: none;
   }
-  grid-template-columns: 20% 20% 20% 20%;
+  grid-template-columns: 14rem 14rem 14rem 14rem 14rem;
   &:hover: {
   }
   @media (max-width: 600px) {
-    grid-template-columns: 90%;
+    grid-template-columns: 45% 45%;
   }
 
   @media (min-width: 600px) and (max-width: 800px) {
@@ -25,22 +26,27 @@ const AnimeCardsStyle = styled.div`
 
 const AnimeCardsGrid = ({ animesData }) => {
   return (
-    <AnimeCardsStyle className="justify-content-center">
-      {animesData &&
-        animesData.data.map((data) => {
-          return (
-            <AnimeCard
-              key={data.id}
-              title={data.attributes.canonicalTitle}
-              imgUrl={data.attributes.posterImage}
-              id={data.id}
-              popularityRank={data.attributes.popularityRank}
-              ratingRank={data.attributes.ratingRank}
-              synopsis={data.attributes.synopsis}
-            ></AnimeCard>
-          );
-        })}
-    </AnimeCardsStyle>
+    <>
+      {animesData ? (
+        <AnimeCardsStyle className="justify-content-center">
+          {animesData.data.map((data) => {
+            return (
+              <AnimeCard
+                key={data.id}
+                title={data.attributes.canonicalTitle}
+                imgUrl={data.attributes.posterImage}
+                id={data.id}
+                popularityRank={data.attributes.popularityRank}
+                ratingRank={data.attributes.ratingRank}
+                synopsis={data.attributes.synopsis}
+              ></AnimeCard>
+            );
+          })}
+        </AnimeCardsStyle>
+      ) : (
+        <Spinner></Spinner>
+      )}
+    </>
   );
 };
 

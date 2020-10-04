@@ -126,85 +126,84 @@ const Animes = (props) => {
       const result = await getAnimes(params);
       setAnimeData(result);
     }
-    console.log(filters);
     getAnimeResult();
   }, [params]);
 
-  if (animesData) {
-    return (
-      <>
-        <Searchbar handleSubmit={handleSubmit} />
+  return (
+    <>
+      <Searchbar handleSubmit={handleSubmit} />
 
-        <div className="row">
-          <div className="col-8 col-sm-6">
-            <Button onClickFunction={handleClickCurrent} label="All" />
-            <Button
-              onClickFunction={handleClickCurrent}
-              isActive={filters.status.active ? true : false}
-              label="Airing"
-            />
-            <Button
-              onClickFunction={showCategoriesClicked}
-              isActive={showCategories}
-              label="Categories"
-            >
-              <i
-                className={
-                  "fas " +
-                  (showCategories
-                    ? "fa-angle-double-up"
-                    : "fa-angle-double-down")
-                }
-              />{" "}
-            </Button>
-          </div>
-
-          <div className="col-4 col-sm-6">
-            <div className="mx-1 my-1 float-right">
-              <span>Show:</span>
-              <select
-                onChange={(e) => selectLimitHandler(e)}
-                defaultValue="10"
-                name="showLimit"
-              >
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
-                <option value="20">20</option>
-              </select>
-            </div>
-            <div className="mx-1 my-1 float-right">
-              <span>Sort By:</span>
-              <select onChange={(e) => selectChangeHandler(e)} name="sortBy">
-                <option value="popularityRank">Popularity</option>
-                <option value="-startDate">Airing Date</option>
-              </select>
-            </div>
-          </div>
+      <div className="row">
+        <div className="col-8 col-sm-6">
+          <Button onClickFunction={handleClickCurrent} label="All" />
+          <Button
+            onClickFunction={handleClickCurrent}
+            isActive={filters.status.active ? true : false}
+            label="Airing"
+          />
+          <Button
+            onClickFunction={showCategoriesClicked}
+            isActive={showCategories}
+            label="Categories"
+          >
+            <i
+              className={
+                "fas " +
+                (showCategories ? "fa-angle-double-up" : "fa-angle-double-down")
+              }
+            />{" "}
+          </Button>
         </div>
 
-        <CategoriesWrapper
-          showCategories={showCategories}
-          onClickCategoryHandler={onClickCategoryHandler}
-          activeCategory={activeCategory}
-        />
+        <div className="col-4 col-sm-6">
+          <div className="mx-1 my-1 float-right">
+            <span>Show:</span>
+            <select
+              onChange={(e) => selectLimitHandler(e)}
+              defaultValue="10"
+              name="showLimit"
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="20">20</option>
+            </select>
+          </div>
+          <div className="mx-1 my-1 float-right">
+            <span>Sort By:</span>
+            <select onChange={(e) => selectChangeHandler(e)} name="sortBy">
+              <option value="popularityRank">Popularity</option>
+              <option value="-startDate">Airing Date</option>
+            </select>
+          </div>
+        </div>
+      </div>
 
-        <Pagination
-          actualPage={page ? page : 0}
-          changeURL={changeURLParams}
-          pagesLimit={Math.floor(animesData.meta.count / params.page.limit)}
-        />
-        <AnimeCardsGrid animesData={animesData} />
-        <Pagination
-          actualPage={page ? page : 0}
-          changeURL={changeURLParams}
-          pagesLimit={Math.floor(animesData.meta.count / params.page.limit)}
-        />
-      </>
-    );
-  } else {
-    return <Spinner />;
-  }
+      <CategoriesWrapper
+        showCategories={showCategories}
+        onClickCategoryHandler={onClickCategoryHandler}
+        activeCategory={activeCategory}
+      />
+
+      {animesData ? (
+        <>
+          <Pagination
+            actualPage={page ? page : 0}
+            changeURL={changeURLParams}
+            pagesLimit={Math.floor(animesData.meta.count / params.page.limit)}
+          />
+          <AnimeCardsGrid animesData={animesData} />
+          <Pagination
+            actualPage={page ? page : 0}
+            changeURL={changeURLParams}
+            pagesLimit={Math.floor(animesData.meta.count / params.page.limit)}
+          />
+        </>
+      ) : (
+        <Spinner />
+      )}
+    </>
+  );
 };
 
 export default withRouter(Animes);

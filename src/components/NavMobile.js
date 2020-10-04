@@ -99,7 +99,7 @@ const NavMobile = () => {
             </Link>
           </li>
           <li>
-            <Link offset="20px" to="/">
+            <Link offset="20px" to="/anime/top-upcoming">
               Trend Upcoming
             </Link>
           </li>
